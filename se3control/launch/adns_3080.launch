@@ -1,0 +1,87 @@
+<launch>
+<group ns="hotel">
+<node pkg="nodelet"
+	type="nodelet"
+	name="nodelet_manager"
+	args="manager"/>
+
+<node pkg="nodelet"
+type="nodelet"
+name="quad_serial_comm"
+args="load quad_serial_comm/QuadSerialComm nodelet_manager"
+output="screen">
+<param name="device" value="/dev/ttyO0"/>
+<param name="baud_rate" value="230400"/>
+</node>
+
+<node pkg="sonar"
+type="sonar"
+name="down_sonar"
+output="screen">
+<param name="channel" value="/sys/class/hwmon/hwmon0/device/in2_input"/>
+</node>
+<node pkg="sonar"
+type="sonar"
+name="left_sonar"
+output="screen">
+<param name="channel" value="/sys/class/hwmon/hwmon0/device/in5_input"/>
+</node>
+
+<node pkg="nodelet"
+type="nodelet"
+name="quad_encode_msg"
+args="load quad_encode_msg/QuadEncodeMsg nodelet_manager"
+output="screen">
+<remap from="~so3_cmd" to="so3_cmd"/>
+<remap from="~serial_msg" to="quad_serial_comm/to_robot"/>
+</node>
+
+<node pkg="nodelet"
+type="nodelet"
+name="quad_decode_msg"
+args="load quad_decode_msg/QuadDecodeMsg nodelet_manager"
+output="screen">
+<remap from="~serial" to="quad_serial_comm/from_robot"/>
+</node>
+
+
+<node pkg="se3control"
+type="se3control_standalone"
+name="se3control_standalone"
+output="screen">
+<remap from="~so3_cmd" to="so3_cmd"/>
+<remap from="~odom" to="filter/odom"/>
+<remap from="~trajectory" to="trajectory"/>
+<param name="pd_control" value="1"/>
+</node>
+
+<node pkg="se3control"
+type="trajectory_standalone"
+name="trajectory_standalone"
+output="screen">
+<remap from="~odom" to="filter/odom"/>
+<remap from="~rc" to="quad_decode_msg/output_data"/>
+<remap from="~trajectory" to="trajectory"/>
+</node>
+
+<node pkg="optical_flow"
+name="filter"
+type="filter"
+output="screen">
+<remap from="~optical_flow" to="adns3080/optical_flow"/>
+<remap from="~imu" to="quad_decode_msg/imu"/>
+<remap from="~odom" to="filter/odom"/>
+<remap from="~down" to="down_sonar/sonar_range"/>
+<remap from="~left" to="left_sonar/sonar_range"/>
+</node>
+
+<node pkg="nodelet"
+type="nodelet"
+name="adns3080"
+args="load adns3080/ADNS3080 nodelet_manager"
+output="screen">
+<param name="output_rate" value="10"/>
+</node>
+
+</group>
+</launch>

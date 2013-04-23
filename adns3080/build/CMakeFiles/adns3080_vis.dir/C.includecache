@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/adns3080.h
+stdint.h
+-
+
+../include/adns3080_srom.h
+
+/home/root/ros/adns3080/src/adns3080.c
+adns3080.h
+/home/root/ros/adns3080/src/adns3080.h
+adns3080_srom.h
+/home/root/ros/adns3080/src/adns3080_srom.h
+stdio.h
+-
+unistd.h
+-
+fcntl.h
+-
+sys/ioctl.h
+-
+linux/spi/spidev.h
+-
+errno.h
+-
+

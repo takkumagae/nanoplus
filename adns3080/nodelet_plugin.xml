@@ -1,0 +1,7 @@
+<library path="lib/libadns3080">
+  <class name="adns3080/ADNS3080" type="ADNS3080" base_class_type="nodelet::Nodelet">
+    <description>
+      adns3080 is simple nodelet for reading the optical flow output from the ADNS3080 mouse sensor
+    </description>
+  </class>
+</library>

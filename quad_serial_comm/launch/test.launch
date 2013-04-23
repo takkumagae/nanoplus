@@ -1,0 +1,12 @@
+<launch>
+  <group ns="hotel">
+    <node pkg="nodelet"
+      type="nodelet"
+      name="quad_serial_comm"
+      args="standalone quad_serial_comm/QuadSerialComm"
+      output="screen">
+      <param name="device" value="/dev/ttyO0"/>
+      <param name="baud_rate" value="230400"/>
+    </node>
+  </group>
+</launch>

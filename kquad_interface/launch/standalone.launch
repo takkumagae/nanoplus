@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="nodelet"
+    type="nodelet"
+    name="kquad_interface"
+    args="standalone kquad_interface/kQuadInterfaceNodelet"
+    output="screen">
+<param name="serial_device" value="/dev/ttyO0"/>
+<param name="serial_baud_rate" value="921600"/>
+  </node>
+</launch>

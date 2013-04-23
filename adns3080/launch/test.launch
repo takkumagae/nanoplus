@@ -1,0 +1,34 @@
+<launch>
+<group ns="hotel">
+    <node pkg="nodelet"
+      type="nodelet"
+      name="quad_serial_comm"
+      args="standalone quad_serial_comm/QuadSerialComm"
+      output="screen">
+      <param name="device" value="/dev/ttyO0"/>
+      <param name="baud_rate" value="230400"/>
+    </node>
+  </group>
+
+  <node pkg="nodelet"
+    type="nodelet"
+    name="adns3080"
+    args="standalone adns3080/ADNS3080"
+		output="screen">
+    <param name="output_rate" value="10"/>
+  </node>
+
+ <node pkg="sonar"
+        type="sonar"
+        name="down_sonar"
+        output="screen">
+  <param name="channel" value="/sys/class/hwmon/hwmon0/device/in2_input"/>
+  </node>
+  <node pkg="sonar"
+        type="sonar"
+        name="left_sonar"
+        output="screen">
+  <param name="channel" value="/sys/class/hwmon/hwmon0/device/in5_input"/>
+  </node>
+
+</launch>

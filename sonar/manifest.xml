@@ -1,0 +1,15 @@
+<package>
+  <description brief="sonar">
+
+    Driver for using the Maxbotix ultrasonic range finder connected on an ADC channel on the Overo
+
+  </description>
+  <author>Kartik Mohta</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/sonar</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

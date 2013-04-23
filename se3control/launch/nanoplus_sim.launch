@@ -1,0 +1,36 @@
+<launch>
+<group ns="nanoplus">
+<node pkg="nodelet"
+	type="nodelet"
+	name="nodelet_manager"
+	args="manager"/>
+
+<node pkg="nodelet"
+type="nodelet"
+name="kquad_interface"
+args="standalone kquad_interface/kQuadInterfaceNodelet"
+output="screen">
+<param name="serial_device" value="/dev/ttyO0"/>
+<remap from="~trpy_command" to="trpy_cmd"/>
+</node>
+
+<node pkg="sonar"
+type="sonar"
+name="ir"
+output="screen">
+<param name="channel" value="/sys/class/hwmon/hwmon0/device/in3_input"/>
+</node>
+
+<node pkg="se3control"
+type="nanoplus"
+name="nanoplus_control"
+output="screen">
+<remap from="~trpy_cmd" to="trpy_cmd"/>
+<remap from="~odom" to="/odom"/>
+<remap from="~rc" to="kquad_interface/output"/>
+<remap from="~ir" to="ir/sonar_range"/>
+<param name="pd_control" value="0"/>
+</node>
+
+</group>
+</launch>

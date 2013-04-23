@@ -1,0 +1,16 @@
+<launch>
+	<node pkg="sonar"
+				type="sonar"
+				name="down_sonar"
+				output="screen">
+  <param name="channel" value="/sys/class/hwmon/hwmon0/device/in2_input"/>
+	</node>
+	<node pkg="sonar"
+				type="sonar"
+				name="left_sonar"
+				output="screen">
+  <param name="channel" value="/sys/class/hwmon/hwmon0/device/in5_input"/>
+	</node>
+
+
+</launch>

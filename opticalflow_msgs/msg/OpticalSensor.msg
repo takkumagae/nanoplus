@@ -1,0 +1,15 @@
+float64 x
+float64 y
+float64 z
+float64 vx
+float64 vy
+float64 vz
+float64 vicon_x
+float64 vicon_y
+float64 vicon_z
+float64 vicon_vx
+float64 vicon_vy
+float64 vicon_vz
+float64 roll
+float64 pitch
+float64 yaw

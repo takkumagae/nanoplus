@@ -1,0 +1,71 @@
+<launch>
+<group ns="nanoplus">
+<node pkg="nodelet"
+	type="nodelet"
+	name="nodelet_manager"
+	args="manager"/>
+
+<node pkg="nodelet"
+type="nodelet"
+name="kquad_interface"
+args="standalone kquad_interface/kQuadInterfaceNodelet"
+output="screen">
+<param name="serial_device" value="/dev/ttyO0"/>
+<param name="quad_id" value="0"/>
+<remap from="~trpy_command" to="trpy_cmd"/>
+</node>
+
+<node pkg="sonar"
+type="sonar"
+name="down_sonar"
+output="screen">
+<param name="channel" value="/sys/class/hwmon/hwmon0/device/in2_input"/>
+</node>
+<node pkg="sonar"
+type="sonar"
+name="left_sonar"
+output="screen">
+<param name="channel" value="/sys/class/hwmon/hwmon0/device/in5_input"/>
+</node>
+<node pkg="sonar"
+type="sonar"
+name="ir"
+output="screen">
+<param name="channel" value="/sys/class/hwmon/hwmon0/device/in3_input"/>
+</node>
+
+
+
+<node pkg="se3control"
+type="nanoplus"
+name="nanoplus_control"
+output="screen">
+<remap from="~trpy_cmd" to="trpy_cmd"/>
+<remap from="~odom" to="filter/odom"/>
+<remap from="~rc" to="kquad_interface/output"/>
+<param name="pd_control" value="1"/>
+</node>
+
+<node pkg="optical_flow"
+name="filter"
+type="filter_turn"
+output="screen">
+<remap from="~optical_flow" to="adns3080/optical_flow"/>
+<remap from="~imu" to="kquad_interface/output"/>
+<remap from="~odom" to="filter/odom"/>
+<remap from="~down" to="down_sonar/sonar_range"/>
+<remap from="~left" to="left_sonar/sonar_range"/>
+<rosparam file="$(find optical_flow)/config/filter_params.yaml"/>
+<param name="init_sonar" value="0.66"/>
+</node>
+
+<node pkg="nodelet"
+type="nodelet"
+name="adns3080"
+args="load adns3080/ADNS3080 nodelet_manager"
+output="screen">
+<param name="output_rate" value="10"/>
+</node>
+
+</group>
+</launch>

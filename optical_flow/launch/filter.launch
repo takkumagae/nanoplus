@@ -1,0 +1,11 @@
+<launch>
+
+<node pkg="optical_flow"
+name="filter"
+type="filter"
+output="screen">
+<remap from="/imu" to="quad_decode_msg/imu"/>
+<remap from="adns3080/optical_flow" to="adns3080/optical_flow"/>
+<remap from="/vicon" to="/Hotel/vicon/odom"/>
+</node>
+</launch>

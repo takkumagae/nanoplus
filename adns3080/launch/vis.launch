@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="adns3080"
+        type="adns3080_vis"
+        name="adns3080_vis">
+    <param name="output_rate" value="5.0"/>
+  </node>
+</launch>

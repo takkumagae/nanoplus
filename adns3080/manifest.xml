@@ -1,0 +1,21 @@
+<package>
+  <description brief="adns3080">
+
+     adns3080
+
+  </description>
+  <author>Kartik Mohta</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/adns3080</url>
+  <depend package="roscpp"/>
+  <depend package="nodelet"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+
+  <export>
+    <nodelet plugin="${prefix}/nodelet_plugin.xml"/>
+  </export>
+</package>
+
+

@@ -1,0 +1,11 @@
+<launch>
+
+<node pkg="optical_flow"
+name="px4flow_filter"
+type="px4flow_filter"
+output="screen">
+<remap from="~opt_flow" to="/px4flow/optical_flow"/>
+<remap from="~odom" to="/Hotel/vicon/odom"/>
+<remap from="~imu" to="/quad_decode_msg/imu"/>
+</node>
+</launch>

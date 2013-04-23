@@ -1,0 +1,11 @@
+<launch>
+ <node pkg="nodelet"
+    type="nodelet"
+    name="quad_encode_msg"
+    args="standalone quad_encode_msg/QuadEncodeMsg"
+    output="screen">
+    <remap from="~so3_cmd" to="so3_cmd"/>
+    <remap from="~serial_msg" to="hotel/quad_serial_comm/to_robot"/>
+  </node>
+</launch>
+

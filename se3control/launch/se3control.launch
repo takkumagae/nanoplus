@@ -1,0 +1,48 @@
+<launch>
+<node pkg="nodelet"
+type="nodelet"
+name="quad_encode_msg"
+args="standalone quad_encode_msg/QuadEncodeMsg"
+output="screen">
+<remap from="~so3_cmd" to="so3_cmd"/>
+<remap from="~serial_msg" to="hotel/quad_serial_comm/to_robot"/>
+</node>
+
+<node pkg="nodelet"
+type="nodelet"
+name="quad_decode_msg"
+args="standalone quad_decode_msg/QuadDecodeMsg"
+output="screen">
+<remap from="~serial" to="/hotel/quad_serial_comm/from_robot"/>
+</node>
+
+
+<node pkg="se3control"
+type="se3control"
+name="se3control"
+output="screen">
+<remap from="/se3control/so3_cmd" to="so3_cmd"/>
+<remap from="/se3control/state_msg" to="state_msg"/>
+<remap from="~odom" to="/Hotel/vicon/odom"/>
+<remap from="~optical_flow" to="/Hotel/px4flow/odom"/>
+</node>
+
+<node pkg="se3control"
+type="trajectory"
+name="trajectory"
+output="screen">
+<remap from="/odom" to="/Hotel/vicon/odom"/>
+<remap from="/rc" to="/quad_decode_msg/output_data"/>
+</node>
+
+<node pkg="px4flow_ukf"
+name="px4flow_ukf"
+type="px4flow_ukf"
+output="screen">
+<remap from="~odom" to="Hotel/px4flow/odom"/>
+<remap from="~imu" to="quad_decode_msg/imu"/>
+<remap from="~flow" to="px4flow/opt_flow"/>
+</node>
+
+
+</launch>

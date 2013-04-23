@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/crc.h
+stdint.h
+-
+
+../include/kBotPacket2.h
+stdio.h
+-
+stdint.h
+-
+
+/home/root/ros/kquad_interface/src/crc32.c
+stdint.h
+-
+
+/home/root/ros/kquad_interface/src/kBotPacket2.c
+kBotPacket2.h
+/home/root/ros/kquad_interface/src/kBotPacket2.h
+crc.h
+/home/root/ros/kquad_interface/src/crc.h
+string.h
+-
+

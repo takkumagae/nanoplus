@@ -1,0 +1,20 @@
+<package>
+  <description brief="se3control">
+
+     se3control
+
+  </description>
+  <author>sikang</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/se3control</url>
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+  <depend package="quadrotor_msgs"/>
+  <depend package="tf"/>
+	<depend package="opticalflow_msgs"/>
+  <depend package="sonar"/>
+</package>
+
+
